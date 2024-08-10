@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website with Loading Indicator</title>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/ripples.js"></script>
+    <style>
+        /* Center the ripple loader in the viewport */
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999; /* Ensure it's above other content */
+            transition: opacity 0.5s ease-out;
+            background-color: cyan;
+        }
+        
+        /* Hide the content until fully loaded */
+        #content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ripple Effect Loading Indicator -->
+    <div id="loading">
+        <l-ripples
+            size="50"
+            speed="2"
+            color="blue"
+        ></l-ripples>
+    </div>
+
+    <!-- Website Content -->
+    <div id="content">
+        <h1>Welcome to My Website</h1>
+        <p>This is the content of the website.</p>
+        <!-- Add more content here -->
+    </div>
+
+    <script>
+        // To ensure the animation starts, use requestAnimationFrame
+        function startLoadingAnimation() {
+            document.getElementById('loading').style.opacity = 1;
+        }
+
+        // Ensure the animation starts right after the DOM is ready
+        window.addEventListener('DOMContentLoaded', function() {
+            requestAnimationFrame(startLoadingAnimation);
+        });
+
+        // Hide the loading indicator and show the content after everything is loaded
+        window.addEventListener('load', function() {
+            document.getElementById('loading').style.opacity = 0;
+            document.getElementById('content').style.display = 'block';
+            requestAnimationFrame(() => {
+                document.getElementById('content').style.opacity = 1;
+            });
+        });
+    </script>
+</body>
+</html>
