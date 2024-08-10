@@ -1,2 +1,0 @@
-# IEEE
-IEEE JIT STUDENT BRANCH website
